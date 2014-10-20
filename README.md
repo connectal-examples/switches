@@ -1,0 +1,4 @@
+leds
+====
+
+Zynq Switches Example
