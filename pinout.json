@@ -1,0 +1,14 @@
+{
+    "gpio_sw_left": {
+	"PIO_DIRECTION": "INPUT",
+	"pin_name": "GPIO_sw_left"
+    },
+    "gpio_sw_center": {
+	"PIO_DIRECTION": "INPUT",
+	"pin_name": "GPIO_sw_center"
+    },
+    "gpio_sw_right": {
+	"PIO_DIRECTION": "INPUT",
+	"pin_name": "GPIO_sw_right"
+    }
+}
