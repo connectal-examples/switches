@@ -22,6 +22,6 @@
 // SOFTWARE.
 
 interface SwitchPins;
-   method Action gpio_sw(Bit#(1) left, Bit#(1) center, Bit#(1) right);
+   method Action gpio_sw(Bit#(1) left, Bit#(1) center, Bit#(1) right, Bit#(1) down, Bit#(1) up);
 endinterface
 

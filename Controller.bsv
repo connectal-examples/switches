@@ -38,8 +38,8 @@ interface SwitchRequest;
 endinterface
 
 interface SwitchIndication;
-   method Action switchPositions(Bit#(1) left, Bit#(1) center, Bit#(1) right);
-   method Action switchesChanged(Bit#(1) left, Bit#(1) center, Bit#(1) right);
+   method Action switchPositions(Bit#(1) left, Bit#(1) center, Bit#(1) right, Bit#(1) down, Bit#(1) up);
+   method Action switchesChanged(Bit#(1) left, Bit#(1) center, Bit#(1) right, Bit#(1) down, Bit#(1) up);
 endinterface
 
 interface LedControllerRequest;
@@ -59,12 +59,12 @@ module mkControllerRequest#(SwitchIndication switchIndication)(Controller);
    Reg#(Bit#(32)) remainingDuration <- mkReg(0);
 
    Reg#(Bool)   changedReg <- mkReg(False);
-   Reg#(Bit#(3)) switchReg <- mkReg(0);
+   Reg#(Bit#(5)) switchReg <- mkReg(0);
 
    FIFO#(LedControllerCmd) ledsCmdFifo <- mkSizedFIFO(32);
 
    rule switchChanged if (changedReg);
-      switchIndication.switchesChanged(switchReg[2], switchReg[1], switchReg[0]);
+      switchIndication.switchesChanged(switchReg[0], switchReg[1], switchReg[2], switchReg[3], switchReg[4]);
    endrule
 
    rule updateLeds;
@@ -89,15 +89,15 @@ module mkControllerRequest#(SwitchIndication switchIndication)(Controller);
    endinterface
    interface SwitchRequest switchRequest;
       method Action getSwitchPositions();
-	 switchIndication.switchPositions(switchReg[2], switchReg[1], switchReg[0]);
+	 switchIndication.switchPositions(switchReg[0], switchReg[1], switchReg[2], switchReg[3], switchReg[4]);
       endmethod
    endinterface
    interface LEDS leds;
       method Bit#(LedsWidth) leds(); return truncate(ledsValue._read); endmethod
    endinterface
    interface SwitchPins switchPins;
-      method Action gpio_sw(Bit#(1) left, Bit#(1) center, Bit#(1) right);
-	 let switchValue = {left, center, right};
+      method Action gpio_sw(Bit#(1) left, Bit#(1) center, Bit#(1) right, Bit#(1) down, Bit#(1) up);
+	 let switchValue = {up, down, right, center, left};
 	 changedReg <= (switchValue != switchReg);
 	 switchReg <= switchValue;
       endmethod
