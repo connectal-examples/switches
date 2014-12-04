@@ -24,7 +24,7 @@
 // bsv libraries
 import Vector::*;
 
-// portz libraries
+// Connectal libraries
 import CtrlMux::*;
 import Portal::*;
 import Leds::*;
