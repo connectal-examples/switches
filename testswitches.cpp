@@ -5,9 +5,9 @@
 #include <assert.h>
 #include <string.h>
 
-#include "SwitchRequestProxy.h"
-#include "SwitchIndicationWrapper.h"
-#include "LedControllerRequestProxy.h"
+#include "SwitchRequest.h"
+#include "SwitchIndication.h"
+#include "LedControllerRequest.h"
 #include "GeneratedTypes.h"
 
 int switchValues = 0;
