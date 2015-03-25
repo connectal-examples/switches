@@ -15,11 +15,11 @@ class SwitchIndication : public SwitchIndicationWrapper
 {
 public:
   SwitchIndication(int id) : SwitchIndicationWrapper(id) { }
-  virtual void switchPositions ( const uint32_t left, const uint32_t center, const uint32_t right, const uint32_t down, const uint32_t up ) {
+  virtual void switchPositions ( const uint8_t left, const uint8_t center, const uint8_t right, const uint8_t down, const uint8_t up ) {
     printf("switches left=%d center=%d right=%d down=%d up=%d\n", left, center, right, down, up);
     switchValues = up << 4 | down << 3 | left << 2 | center << 1 | right;
   }
-  virtual void switchesChanged ( const uint32_t left, const uint32_t center, const uint32_t right, const uint32_t down, const uint32_t up ) {
+  virtual void switchesChanged ( const uint8_t left, const uint8_t center, const uint8_t right, const uint8_t down, const uint8_t up ) {
     printf("switches changed left=%d center=%d right=%d\n", left, center, right);
     switchValues = up << 4 | down << 3 | left << 2 | center << 1 | right;
   }

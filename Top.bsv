@@ -59,7 +59,6 @@ module mkConnectalTop(ConnectalTop#(PhysAddrWidth,DataBusWidth,SwitchPins,0));
    interface interrupt = getInterruptVector(portals);
    interface slave = ctrl_mux;
    interface masters = nil;
-   interface leds = controller.leds;
    interface pins = controller.switchPins;
 
 endmodule : mkConnectalTop
